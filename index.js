@@ -87,8 +87,14 @@ app.post("/articles", (req, res) => {
 
 // Show Articles
 app.get("/articles", async (req, res) => {
-  const articles = await Article.find();
-  res.json(articles);
+  try {
+    const articles = await Article.find();
+    res.json(articles);
+  } catch (error) {
+    res.json(() => {
+      status: `failed ${error}`;
+    });
+  }
 });
 
 // Show Article by ID
