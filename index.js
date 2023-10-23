@@ -2,6 +2,7 @@ const express = require("express");
 const { default: mongoose } = require("mongoose");
 const mogoose = require("mongoose");
 const Article = require("./models/Article");
+const cors = require("cors");
 
 const app = express();
 
@@ -17,6 +18,7 @@ mongoose
   });
 
 app.use(express.json());
+app.use(cors());
 
 // mongodb+srv://mazen:ma01129977413@myfirstexpressjscluster.lv9nqgu.mongodb.net/?retryWrites=true&w=majority
 
@@ -58,8 +60,8 @@ app.get("/allPosts", (req, res) => {
 
 // Add Article
 app.post("/articles", (req, res) => {
-  const reqTitle = req.body.title.trim();
-  const reqBody = req.body.body.trim();
+  const reqTitle = req.body.title;
+  const reqBody = req.body.body;
   if (reqTitle == "" && reqBody == "") {
     res.json({
       status: "title and body are required",
