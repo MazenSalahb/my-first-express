@@ -12,8 +12,8 @@ mongoose
   .then(() => {
     console.log("connected successfully");
   })
-  .catch(() => {
-    console.log("Error With DB Connection");
+  .catch((error) => {
+    console.log("Error With DB Connection: ", error);
   });
 
 app.use(express.json());
@@ -91,8 +91,8 @@ app.get("/articles", async (req, res) => {
     const articles = await Article.find();
     res.json(articles);
   } catch (error) {
-    res.json(() => {
-      status: `failed ${error}`;
+    res.json({
+      status: `failed ${error}`,
     });
   }
 });
