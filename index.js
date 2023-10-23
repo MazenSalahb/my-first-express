@@ -112,7 +112,6 @@ app.delete("/articles/:articleID", (req, res) => {
     .then(() => {
       res.json({
         status: "success",
-        article: article,
       });
     })
     .catch(() => {
