@@ -90,7 +90,7 @@ app.post("/articles", (req, res) => {
 // Show Articles
 app.get("/articles", async (req, res) => {
   try {
-    const articles = await Article.find();
+    const articles = await Article.find().sort({ $natural: -1 });
     res.json(articles);
   } catch (error) {
     res.json({
