@@ -4,6 +4,8 @@ const mogoose = require("mongoose");
 const Article = require("./models/Article");
 const cors = require("cors");
 
+const userRoutes = require("./routes/userRoutes");
+
 const app = express();
 
 mongoose
@@ -128,6 +130,8 @@ app.delete("/articles/:articleID", (req, res) => {
       });
     });
 });
+
+app.use(userRoutes);
 
 app.listen(3000, () => {
   console.log("listening in port 3000");
