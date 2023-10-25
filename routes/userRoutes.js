@@ -11,7 +11,7 @@ router.post("/register", async (req, res) => {
   try {
     const fineUser = await User.findOne({ email });
     if (fineUser) {
-      res.status(400).json({
+      res.json({
         status: "user exists!",
       });
     } else {
@@ -23,7 +23,7 @@ router.post("/register", async (req, res) => {
       res.json({ status: "success", newUser });
     }
   } catch (e) {
-    res.status(400).json({
+    res.json({
       status: `faield ${e}`,
     });
   }
@@ -34,7 +34,7 @@ router.post("/login", async (req, res) => {
   try {
     const findUser = await User.findOne({ email });
     if (!findUser) {
-      res.status(400).json({
+      res.json({
         status: "user not exists!",
       });
     } else {
@@ -42,13 +42,13 @@ router.post("/login", async (req, res) => {
       if (passwordMatch) {
         res.json({ status: "success" });
       } else {
-        res.status(400).json({
+        res.json({
           status: "user not exists!",
         });
       }
     }
   } catch (e) {
-    res.status(400).json({
+    res.json({
       status: `faield ${e}`,
     });
   }
