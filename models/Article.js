@@ -7,6 +7,7 @@ const articleSchema = new Schema({
   title: String,
   body: String,
   likes: Number,
+  imageUrl: String,
 });
 
 const Article = mogoose.model("Article", articleSchema);

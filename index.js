@@ -3,6 +3,7 @@ const { default: mongoose } = require("mongoose");
 const mogoose = require("mongoose");
 const Article = require("./models/Article");
 const cors = require("cors");
+const imageMiddle = require("./extras/imageMiddle");
 
 const userRoutes = require("./routes/userRoutes");
 
@@ -21,6 +22,7 @@ mongoose
 
 app.use(express.json());
 app.use(cors());
+app.use("/images", express.static("images"));
 
 // mongodb+srv://mazen:ma01129977413@myfirstexpressjscluster.lv9nqgu.mongodb.net/?retryWrites=true&w=majority
 
@@ -61,7 +63,7 @@ app.get("/allPosts", (req, res) => {
 // ==================== Article ENDPOINTS ====================
 
 // Add Article
-app.post("/articles", (req, res) => {
+app.post("/articles", imageMiddle.single("articleImage"), (req, res) => {
   const reqTitle = req.body.title;
   const reqBody = req.body.body;
   if (reqTitle == "" && reqBody == "") {
@@ -73,6 +75,7 @@ app.post("/articles", (req, res) => {
     newArticle.title = reqTitle;
     newArticle.body = reqBody;
     newArticle.likes = 0;
+    newArticle.imageUrl = req.file.destination + "/" + req.file.filename;
     newArticle
       .save()
       .then(() => {
