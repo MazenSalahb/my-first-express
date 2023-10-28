@@ -22,7 +22,7 @@ mongoose
 
 app.use(express.json());
 app.use(cors());
-app.use("/images", express.static("images"));
+app.use("/Images", express.static("Images"));
 
 // mongodb+srv://mazen:ma01129977413@myfirstexpressjscluster.lv9nqgu.mongodb.net/?retryWrites=true&w=majority
 
