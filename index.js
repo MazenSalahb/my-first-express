@@ -105,17 +105,17 @@ app.get("/articles", async (req, res) => {
 });
 
 // Show Article by ID
-app.get("/articles/:articleID", (req, res) => {
+app.get("/articles/:articleID", async (req, res) => {
   const id = req.params.articleID;
-  const article = Article.findById(id)
-    .then(() => {
-      res.json(article);
-    })
-    .catch(() => {
-      res.json({
-        status: "error",
-      });
+
+  try {
+    const article = await Article.findById(id);
+    res.json({ article, status: "success" });
+  } catch (error) {
+    res.json({
+      status: "error " + error.message,
     });
+  }
 });
 
 // Delete Article
